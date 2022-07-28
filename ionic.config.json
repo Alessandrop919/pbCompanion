@@ -1,0 +1,7 @@
+{
+  "name": "pbCompanion",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
