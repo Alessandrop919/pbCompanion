@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Insert the credentials of your account or create a new one</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+
+      <br>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+    </ion-card-content>
+
+    <ion-button (click)="register()" expand="block">Register</ion-button>
+    <ion-button (click)="logIn()" expand="block">Login</ion-button>
+
+
+  </ion-card>
+</ion-content>
