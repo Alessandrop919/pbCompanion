@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
+import { AvatarService } from '../services/avatar.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +11,11 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  profile=null;
+  constructor( private avatarService: AvatarService, private authService: AuthService, private Router: Router, private loadingController: LoadingController, private alertController: AlertController) {}
 
+  async logout(){
+    await this.authService.logout();
+    this.Router.navigateByUrl('/',{ replaceUrl:true});
+  }
 }

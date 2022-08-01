@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "pbcompanion": {
+      "hosting": {
+        "app": [
+          "pbcompanion"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "pbcompanion"
+  }
+}
