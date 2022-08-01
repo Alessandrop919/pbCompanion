@@ -7,7 +7,8 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Insert the credentials of your account or create a new one</ion-card-title>
+      <ion-card-title>Login</ion-card-title>
+      <ion-card-subtitle>Insert the credentials of your existing account or create a new one</ion-card-subtitle>
     </ion-card-header>
     
     <ion-card-content>
@@ -26,11 +27,7 @@
 
         <ion-button expand= "full" type="submit" [disabled]="!credentials.valid">Login</ion-button>
         <ion-button expand= "full" type="button" (click)="register()" color="secondary">Create account</ion-button>
-      </form>
-
-      
-
-      
+      </form>     
 
     </ion-card-content>
     
