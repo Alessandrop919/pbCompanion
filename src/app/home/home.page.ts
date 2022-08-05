@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {}
+export class HomePage {
+  constructor(private dataService : DataService){
+    this.dataService.getNotes().subscribe(res => {console.log(res)});
+  }
+}
