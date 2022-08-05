@@ -1,31 +1,11 @@
-
-  <ion-toolbar>      
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <div>
-            
-          </div>
-        </ion-col>
-        <ion-col>
-          <div>
-            ProjectB Companion
-          </div>
-        </ion-col>
-        <ion-col>
-          <div>
-            <ion-fab-button  (click)="goToAccount()" slot="end" size="small"> 
-            <ion-icon  name="person-circle-outline" ></ion-icon>
-            </ion-fab-button>
-          </div>
-        </ion-col>
-        
-      </ion-row>
-      <ion-row>
-        <ion-col><div><ion-fab-button (click)="goToHome()">Home</ion-fab-button></div></ion-col>
-        <ion-col><div>WIP</div></ion-col>
-        <ion-col><div>WIP</div></ion-col>
-        <ion-col><div>WIP</div></ion-col>
-      </ion-row>
-    </ion-grid>   
-  </ion-toolbar>
+<ion-toolbar >      
+  <ion-grid>
+    <ion-row>
+      <ion-col><div><ion-fab-button  slot= "icon-only" size="small" color="medium"><ion-icon name="planet-outline" Default="Leaderboards"></ion-icon></ion-fab-button></div></ion-col>      
+      <ion-col><div><ion-fab-button  slot= "icon-only" size="small" color="medium"><ion-icon name="podium-outline" Default="Leaderboards"></ion-icon></ion-fab-button></div></ion-col>      
+      <ion-col><div><ion-fab-button slot= "icon-only" (click)="goToHome()" size="small" color="medium"><ion-icon name="rocket-outline" ></ion-icon></ion-fab-button></div></ion-col>
+      <ion-col><div><ion-fab-button  slot= "icon-only" size="small" color="medium"><ion-icon name="people-outline" Default="Leaderboards"></ion-icon></ion-fab-button></div></ion-col>      
+      <ion-col><div><ion-fab-button slot= "icon-only" (click)="goToAccount()" size="small" color="medium"><ion-icon  name="person-circle-outline" ></ion-icon></ion-fab-button></div></ion-col>   
+    </ion-row>
+  </ion-grid>   
+</ion-toolbar>
