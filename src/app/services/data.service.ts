@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { collectionData, doc, docData, Firestore, updateDoc, addDoc, collection, deleteDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { getDownloadURL, getStorage } from 'firebase/storage';
+import { ref, Storage } from '@angular/fire/storage';
 
-export interface Note{
-  id?: string; //? means parameter is optional
-  testField1: string;
-  testField2: string;
+export interface Content{
+  id?: string; 
+  Description: string;
+  Date: string;
+  Image: string;
+  Title: string;
 }
 
 @Injectable({
@@ -13,30 +18,41 @@ export interface Note{
 })
 export class DataService {
 
-  constructor(private firestore : Firestore) { }
+  constructor(private firestore : Firestore, private storage:Storage) { }
 
-  getNotes(): Observable<Note[]>{ //returns whole collection as array
-    const notesReference = collection(this.firestore,'notes');
-    return collectionData(notesReference, { idField :'id'}) as Observable<Note[]>;
+  getContents(): Observable<Content[]>{ 
+    const ContentsReference = collection(this.firestore,'HomeContents');
+    let coll= collectionData(ContentsReference, { idField :'id'}) as Observable<Content[]>;    
+    const newColl= coll.pipe(
+      map(contents => {
+        for(let i=0;i<contents.length;i++){
+          let content=contents[i];
+          let pathReference=ref(this.storage,content.Image);   
+          getDownloadURL(pathReference).then((url) => {content.Image=url;});          
+        }
+        return contents;
+      })
+    );
+    return newColl ;
   }
 
-  getNoteById(id): Observable<Note>{ //returns whole collection as array
-    const noteDocReference = doc(this.firestore,'notes/${id}');
-    return docData(noteDocReference, { idField :'id'}) as Observable<Note>;
+  getContentById(id): Observable<Content>{ 
+    const ContentDocReference = doc(this.firestore,'HomeContents/${id}');
+    return docData(ContentDocReference, { idField :'id'}) as Observable<Content>;
   }
 
-  addNote(note:Note){
-    const notesReference = collection(this.firestore,'notes');
-    return addDoc(notesReference,note);
+  addContent(Content:Content){
+    const ContentsReference = collection(this.firestore,'HomeContents');
+    return addDoc(ContentsReference,Content);
   }
 
-  deleteNote(note:Note){
-    const noteDocReference = doc(this.firestore,'notes.id');
-    return deleteDoc(noteDocReference);
+  deleteContent(Content:Content){
+    const ContentDocReference = doc(this.firestore,'HomeContents.id');
+    return deleteDoc(ContentDocReference);
   }
 
-  updateNote(note:Note){
-    const noteDocReference = doc(this.firestore,'notes.id');
-    return updateDoc(noteDocReference,{testField1: note.testField1, testField2:note.testField2});
+  updateContent(Content:Content){
+    const ContentDocReference = doc(this.firestore,'HomeContents.id');
+    return updateDoc(ContentDocReference,{Description: Content.Description, Date:Content.Date});
   }
 }

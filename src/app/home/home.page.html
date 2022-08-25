@@ -3,21 +3,13 @@
   
   <ion-content [fullscreen]="true">
     
-    <ion-card>
+    <ion-card *ngFor="let content of contents">
       <ion-card-header>
-        <ion-img style="width: 240px; height: 200px;" src="assets/FPSrussia.PNG" alt="the lord himself"></ion-img>
-        <ion-card-subtitle>28/07/2022</ion-card-subtitle>
-        <ion-card-title>Patch Notes 12.4.1</ion-card-title>
+        <ion-img style="width: 240px; height: 200px;" src="{{ content.Image }}" height="100" width="100"></ion-img>
+        <ion-card-subtitle>{{ content.Date }}</ion-card-subtitle>
+        <ion-card-title>{{ content.Title }}</ion-card-title>
+        <ion-card-content>{{ content.Description }}</ion-card-content>
       </ion-card-header>
-    
-      <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit clean.
-      </ion-card-content>
     </ion-card>
-
-    <div id="container">
-      
-    </div>
   </ion-content>
 </ion-app>

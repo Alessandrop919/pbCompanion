@@ -1,6 +1,14 @@
 <ion-header><app-header></app-header></ion-header>
-<ion-content>
+<ion-content class="ion-padding">
   <ion-fab-button color="danger" (click)="logOut()" size="small">    
     <ion-icon name="exit-outline"></ion-icon>
-  </ion-fab-button>   
+  </ion-fab-button>
+  <ion-avatar (click)="changeImage()">
+    <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl">
+    <ng-template #placeholder_avatar>
+      <div class="fallback">
+        <p>Select Avatar</p>
+      </div>
+    </ng-template>
+  </ion-avatar>   
 </ion-content>
