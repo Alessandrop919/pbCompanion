@@ -30,6 +30,11 @@ export class DataService {
           let pathReference=ref(this.storage,content.Image);   
           getDownloadURL(pathReference).then((url) => {content.Image=url;});          
         }
+        contents.sort((content1,content2)=>{
+          if(Number(content1.id)>Number(content2.id))return -1;
+          if(Number(content1.id)<Number(content2.id))return 1;
+          return 0;
+        })
         return contents;
       })
     );
