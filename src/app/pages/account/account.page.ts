@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
-import { AvatarService } from '../services/avatar.service';
-import { LoadingService } from '../services/loading.service';
+import { AuthService } from '../../services/auth.service';
+import { AvatarService } from '../../services/avatar.service';
+import { LoadingService } from '../../services/loading.service';
 
 
 @Component({

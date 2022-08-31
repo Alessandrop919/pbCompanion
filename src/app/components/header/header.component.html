@@ -1,11 +1,64 @@
-<ion-toolbar >      
-  <ion-grid>
-    <ion-row>
-      <ion-col><div><ion-fab-button slot= "icon-only" size="small" color="medium"><ion-icon name="planet-outline"></ion-icon></ion-fab-button></div></ion-col>      
-      <ion-col><div><ion-fab-button slot= "icon-only" size="small" color="medium"><ion-icon name="podium-outline"></ion-icon></ion-fab-button></div></ion-col>      
-      <ion-col><div><ion-fab-button (click)="goToHome()" slot= "icon-only" size="small" color="medium"><ion-icon name="rocket-outline"></ion-icon></ion-fab-button></div></ion-col>
-      <ion-col><div><ion-fab-button slot= "icon-only" size="small" color="medium"><ion-icon name="people-outline"></ion-icon></ion-fab-button></div></ion-col>      
-      <ion-col><div><ion-fab-button (click)="goToAccount()" slot= "icon-only" size="small" color="medium"><ion-icon  name="person-circle-outline"></ion-icon></ion-fab-button></div></ion-col>   
-    </ion-row>
-  </ion-grid>   
-</ion-toolbar>
+<!-- header for smaller screens-->
+<ion-header class="mobile-header" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu">
+        <img src="../../../assets/planet.png" width="50px">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title> {{title}} </ion-title>
+    <ion-buttons slot="end">
+      <ng-container   *ngIf="auth.currentUser ; else notLoggedIn">
+        <ion-button  routerLink="/account" routerDirection="root">
+          Account
+        </ion-button>
+      </ng-container>      
+      <ng-template #notLoggedIn>
+        <ion-button  routerLink="/login" routerDirection="root">
+          Log in
+        </ion-button>
+      </ng-template>      
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- header for bigger screens -->
+<ion-row class="header ion-align-items-center">   
+  <ion-col size="2">
+    <img src="../../../assets/planet.png" width="50px">
+  </ion-col>
+  <ion-col size="8" class="ion-text-center">
+    <ion-button fill="clear" color="dark" routerLink="/" routerDirection="root" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
+      Home
+    </ion-button>
+    <ion-button fill="clear" color="dark" routerLink="/leaderboards" routerDirection="root" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
+      Leaderboards
+    </ion-button>
+    <ion-button fill="clear" color="dark" routerLink="/community" routerDirection="root" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
+      Community
+    </ion-button>
+    <ion-button fill="clear" color="dark" routerLink="/shop" routerDirection="root" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
+      Shop
+    </ion-button>    
+  </ion-col>
+  <ng-container   *ngIf="auth.currentUser ; else notLoggedIn">
+    <ion-col size="1" class="ion-text-right">
+      <ion-button fill="clear" color="dark" routerLink="/account" routerDirection="root" >
+        Account
+      </ion-button>       
+    </ion-col>
+  </ng-container>      
+  <ng-template #notLoggedIn>
+    <ion-col size="1" class="ion-text-right">
+    <ion-button fill="clear" color="dark" routerLink="/login" routerDirection="root" >
+      Log in
+    </ion-button>       
+  </ion-col>
+  </ng-template>  
+  <ion-col size="1" class="ion-text-right">
+    <ion-button class="gradient" href="https://store.steampowered.com/" target="_blank" >
+      <ion-ripple-effect></ion-ripple-effect>
+      Play now      
+    </ion-button>
+  </ion-col>
+</ion-row>

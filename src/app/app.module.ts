@@ -12,7 +12,6 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { initializeApp } from 'firebase/app';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HeaderModule } from './components/header/header.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +21,6 @@ import { HeaderModule } from './components/header/header.module';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HeaderModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(()=> getAuth()),
     provideFirestore(() => getFirestore()),

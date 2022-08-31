@@ -1,8 +1,6 @@
-<ion-app>
-  <ion-header><app-header></app-header></ion-header>  
-  
+<ion-app>  
   <ion-content [fullscreen]="true">
-    
+    <!--titolo NEWS AND PATCH NOTES-->
     <ion-card *ngFor="let content of contents">
       <ion-card-header>
         <ion-img style="width: 240px; height: 200px;" src="{{ content.Image }}" height="100" width="100"></ion-img>

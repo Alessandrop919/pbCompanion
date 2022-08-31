@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Auth } from '@angular/fire/auth';
+
+
 
 @Component({
   selector: 'app-header',
@@ -8,16 +11,11 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  @Input()title:string;
 
-  goToAccount(){
-    this.router.navigateByUrl('/account',{ replaceUrl:true});
+  constructor(private authService: AuthService, public auth:Auth) { }
+
+  ngOnInit() {
+   
   }
-
-  goToHome(){
-    this.router.navigateByUrl('/home',{ replaceUrl:true});
-  }
-
-  ngOnInit() {}
-
 }

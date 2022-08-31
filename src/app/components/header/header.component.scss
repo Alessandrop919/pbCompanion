@@ -1,3 +1,36 @@
-ion-icon {
-    pointer-events: none;
+@media(max-width: 768px){   //smaller screens
+    .mobile-header{
+        display: block;
+    }
+    .bar{
+        color: black;
+    }
+
+    .header{
+        display: none;
+    }
+}
+
+@media(min-width: 768px){   //smaller screens
+    .mobile-header{
+        display: none;
+    }
+
+    .header{
+        display: flex;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+.gradient{
+    --background: linear-gradient(to right,#ac64ff,#428cff);
+    transition: 0.5s;
+}
+.gradient:hover{
+    box-shadow: 0px 0px 20px #676770;
+}         
+
+.active-item{
+    border-bottom: 2px solid var(--ion-color-primary);
 }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router' ;
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-import { LoadingService } from '../services/loading.service';
-import { AuthService } from '../services/auth.service'
+import { LoadingService } from '../../services/loading.service';
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     const user = await this.authService.login(this.credentials.value);
     await this.loadingService.dismiss();
     if(user){
-      this.router.navigateByUrl('/home', {replaceUrl:true});
+      this.router.navigateByUrl('', {replaceUrl:true});
     }else{
       this.showAlert('Login failed', 'Your credentials are invalid, try again.');
     }
@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
     const user = await this.authService.register(this.credentials.value);
     await this.loadingService.dismiss();
     if(user){
-      this.router.navigateByUrl('/home', {replaceUrl:true});
+      this.router.navigateByUrl('', {replaceUrl:true});
     }else{
       this.showAlert('Registration failed', 'Please try again');
     }
