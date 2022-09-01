@@ -24,9 +24,19 @@ export class MenuPage implements OnInit {
     path: '/community'
   },
   {
+    title: 'Shop',
+    icon: 'cart',
+    path: '/shop'
+  },
+  {
     title: 'Account',
     icon: 'person',
     path: '/account'
+  },
+  {
+    title: 'About',
+    icon: 'information-circle',
+    path: '/about'
   }
   ]
 

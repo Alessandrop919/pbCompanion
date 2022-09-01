@@ -8,14 +8,14 @@
     </ion-buttons>
     <ion-title> {{title}} </ion-title>
     <ion-buttons slot="end">
-      <ng-container   *ngIf="auth.currentUser ; else notLoggedIn">
+      <ng-container   *ngIf="auth.currentUser ; else notLoggedIn1">
         <ion-button  routerLink="/account" routerDirection="root">
           Account
         </ion-button>
       </ng-container>      
-      <ng-template #notLoggedIn>
+      <ng-template #notLoggedIn1>
         <ion-button  routerLink="/login" routerDirection="root">
-          Log in
+          Login
         </ion-button>
       </ng-template>      
     </ion-buttons>
@@ -27,7 +27,7 @@
   <ion-col size="2">
     <img src="../../../assets/planet.png" width="50px">
   </ion-col>
-  <ion-col size="8" class="ion-text-center">
+  <ion-col size="8" class="ion-text-left">
     <ion-button fill="clear" color="dark" routerLink="/" routerDirection="root" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
       Home
     </ion-button>
@@ -39,22 +39,23 @@
     </ion-button>
     <ion-button fill="clear" color="dark" routerLink="/shop" routerDirection="root" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
       Shop
+    </ion-button>
+    <ion-button fill="clear" color="dark" routerLink="/about" routerDirection="root" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
+      About
     </ion-button>    
   </ion-col>
-  <ng-container   *ngIf="auth.currentUser ; else notLoggedIn">
-    <ion-col size="1" class="ion-text-right">
+  <ion-col size="1" class="ion-text-right">
+    <ng-container   *ngIf="auth.currentUser ; else notLoggedIn2">    
       <ion-button fill="clear" color="dark" routerLink="/account" routerDirection="root" >
         Account
       </ion-button>       
-    </ion-col>
-  </ng-container>      
-  <ng-template #notLoggedIn>
-    <ion-col size="1" class="ion-text-right">
-    <ion-button fill="clear" color="dark" routerLink="/login" routerDirection="root" >
-      Log in
-    </ion-button>       
-  </ion-col>
-  </ng-template>  
+    </ng-container>      
+    <ng-template #notLoggedIn2>
+      <ion-button fill="clear" color="dark" routerLink="/login" routerDirection="root" >
+        Login
+      </ion-button>       
+    </ng-template>
+  </ion-col>  
   <ion-col size="1" class="ion-text-right">
     <ion-button class="gradient" href="https://store.steampowered.com/" target="_blank" >
       <ion-ripple-effect></ion-ripple-effect>

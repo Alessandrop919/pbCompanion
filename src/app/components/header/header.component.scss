@@ -1,17 +1,14 @@
-@media(max-width: 768px){   //smaller screens
+@media(max-width: 897px){   //smaller screens
     .mobile-header{
         display: block;
     }
-    .bar{
-        color: black;
-    }
-
+    
     .header{
         display: none;
     }
 }
 
-@media(min-width: 768px){   //smaller screens
+@media(min-width: 897px){   //smaller screens
     .mobile-header{
         display: none;
     }
@@ -25,8 +22,9 @@
 
 .gradient{
     --background: linear-gradient(to right,#ac64ff,#428cff);
-    transition: 0.5s;
+    transition: 0.5s;    
 }
+
 .gradient:hover{
     box-shadow: 0px 0px 20px #676770;
 }         

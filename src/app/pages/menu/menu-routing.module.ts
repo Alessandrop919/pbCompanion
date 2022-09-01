@@ -19,7 +19,6 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('../home/home.module').then( m => m.HomePageModule),
-        //...canActivate(redirectUnauthorizedToLogin),
       },
       {
         path: 'account',
@@ -39,11 +38,14 @@ const routes: Routes = [
       {
         path: 'shop',
         loadChildren: () => import('../shop/shop.module').then( m => m.ShopPageModule),
-        //...canActivate(redirectUnauthorizedToLogin),
       },
       {
         path: 'home',
         loadChildren: () => import('../home/home.module').then( m => m.HomePageModule),
+      },
+      {
+        path: 'about',
+        loadChildren: () => import('../about/about.module').then( m => m.AboutPageModule),
       },
     ]
   },
