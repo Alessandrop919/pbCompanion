@@ -7,13 +7,17 @@
     }
 }
 
-@media(min-width: 768px){
+.titles:hover {
+    background-color: var(--ion-color-step-50);
+  }
+
+@media(min-width: 897px){
     ion-router-outlet{
         margin-top: 70px;
     }
 }
 
-@media(max-width: 768px){
+@media(max-width: 897px){
     ion-router-outlet{
         margin-top: 60px;
     }

@@ -3,7 +3,7 @@ import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angula
 import { Routes, RouterModule } from '@angular/router';
 import { MenuPage } from './menu.page';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
@@ -33,7 +33,6 @@ const routes: Routes = [
       {
         path: 'leaderboards',
         loadChildren: () => import('../leaderboards/leaderboards.module').then( m => m.LeaderboardsPageModule),
-        //...canActivate(redirectUnauthorizedToLogin),
       },
       {
         path: 'shop',
@@ -46,6 +45,14 @@ const routes: Routes = [
       {
         path: 'about',
         loadChildren: () => import('../about/about.module').then( m => m.AboutPageModule),
+      },
+      {
+        path: 'forgotpassword',
+        loadChildren: () => import('../forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
+      },
+      {
+        path: 'verifyemail',
+        loadChildren: () => import('../verifyemail/verifyemail.module').then( m => m.VerifyemailPageModule)
       },
     ]
   },

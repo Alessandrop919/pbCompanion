@@ -9,12 +9,12 @@ import { MenuController } from '@ionic/angular';
 export class MenuPage implements OnInit {
 
   menuItems = [{
-    title: 'Home',
+    title: 'HOME',
     icon: 'planet',
     path: ''
   },
   {
-    title: 'Leaderboards',
+    title: 'LEADERBOARDS',
     icon: 'medal',
     path: '/leaderboards'
   },
@@ -27,11 +27,6 @@ export class MenuPage implements OnInit {
     title: 'Shop',
     icon: 'cart',
     path: '/shop'
-  },
-  {
-    title: 'Account',
-    icon: 'person',
-    path: '/account'
   },
   {
     title: 'About',

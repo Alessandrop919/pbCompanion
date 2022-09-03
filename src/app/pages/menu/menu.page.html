@@ -1,14 +1,15 @@
-<ion-menu contentId="main" menuId="main-menu" side="start">
+<ion-menu contentId="main" menuId="main-menu" side="start" >
   <ion-header>
     <ion-toolbar>
       <ion-title>Explore</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-    <ion-menu-toggle *ngFor="let item of menuItems">
-      <ion-item button (click)="setTitle(item.title)" [routerLink]="item.path" routerDirection="root" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
+  <ion-content >
+    <ion-menu-toggle *ngFor="let item of menuItems" >
+      <ion-item class="menu" button (click)="setTitle(item.title)" [routerLink]="item.path" routerDirection="root" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact:true}">
         <ion-icon [name]="item.icon" slot="start"></ion-icon> 
-        {{item.title}}
+        <ion-button class="titles" fill="clear" color="dark">        {{item.title}}
+        </ion-button>
       </ion-item>
     </ion-menu-toggle>
   </ion-content>

@@ -11,25 +11,43 @@ import { AuthService } from '../../services/auth.service'
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  credentials: FormGroup;
+  loginCredentials: FormGroup;
+  regCredentials: FormGroup;
+
+  segment = 'first';
 
   constructor(private router: Router, private fb: FormBuilder, private loadingService: LoadingService, private alertController: AlertController, private authService: AuthService) { }
 
-  get email(){
-    return this.credentials.get('email');
+  get loginEmail(){
+    return this.loginCredentials.get('loginEmail');
   }
-
-  get password(){
-    return this.credentials.get('password');
+  get loginPassword(){
+    return this.loginCredentials.get('loginPassword');
+  }
+  get regEmail(){
+    return this.regCredentials.get('regEmail');
+  }
+  get regPassword1(){
+    return this.regCredentials.get('regPassword1');
+  }
+  get regPassword2(){
+    return this.regCredentials.get('regPassword1');
   }
 
   ngOnInit() {
-    this.credentials=this.fb.group({email: ['', [Validators.required, Validators.email]], password: ['',[Validators.required,Validators.minLength(5)]],});
+    this.loginCredentials=this.fb.group({loginEmail: ['', [Validators.required, Validators.email]], loginPassword: ['', [Validators.required]]});
+    this.regCredentials=this.fb.group({regEmail: ['', [Validators.required, Validators.email]], regPassword1: ['',[Validators.required,Validators.minLength(6)]], regPassword2:['',[Validators.required,Validators.minLength(6)]]},{validator:this.checkPasswords});
   }
 
-  async logIn(){
+  checkPasswords(group:FormGroup){
+    let password1 = group.controls.regPassword1.value;
+    let password2 = group.controls.regPassword2.value;
+    return password1 === password2 ? null : { notSame:true }
+  }
+
+  async submitLogin(){
     await this.loadingService.present({ message: 'Checking credentials',duration: 5000 }); 
-    const user = await this.authService.login(this.credentials.value);
+    const user = await this.authService.login(this.loginEmail.value,this.loginPassword.value);
     await this.loadingService.dismiss();
     if(user){
       this.router.navigateByUrl('', {replaceUrl:true});
@@ -38,9 +56,9 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async register(){
+  async submitRegister(){
     await this.loadingService.present({ message: 'Creating account',duration: 5000 }); 
-    const user = await this.authService.register(this.credentials.value);
+    const user = await this.authService.register(this.regEmail.value,this.regPassword1.value);
     await this.loadingService.dismiss();
     if(user){
       this.router.navigateByUrl('', {replaceUrl:true});
