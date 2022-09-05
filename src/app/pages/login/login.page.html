@@ -23,8 +23,8 @@
             <ion-note slot="error" *ngIf="(loginPassword.dirty || loginPassword.touched) && loginPassword.errors">Password is invalid</ion-note>
           </ion-item>
           <ion-button expand= "full" type="submit" [disabled]="!loginCredentials.valid">Login</ion-button>
-          <p>Password forgot?</p>
-          <ion-button routerLink="/forgotPassword" routerDirection="root">Reset password</ion-button>
+          <p>Forgot your password?</p>
+          <ion-button [routerLink]="['/forgotpassword']" routerDirection="root">Reset password</ion-button>
         </form>
       </ion-card-content>
     </ion-card>

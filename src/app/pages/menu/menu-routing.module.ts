@@ -48,12 +48,13 @@ const routes: Routes = [
       },
       {
         path: 'forgotpassword',
-        loadChildren: () => import('../forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
+        loadChildren: () => import('../forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule),
+        ...canActivate(redirectLoggedInToHome),
       },
       {
         path: 'verifyemail',
         loadChildren: () => import('../verifyemail/verifyemail.module').then( m => m.VerifyemailPageModule)
-      },
+      }      
     ]
   },
   
