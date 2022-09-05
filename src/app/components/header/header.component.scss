@@ -8,7 +8,7 @@
     }
 }
 
-@media(min-width: 897px){   //smaller screens
+@media(min-width: 897px){   //bigger screens
     .mobile-header{
         display: none;
     }
@@ -17,6 +17,10 @@
         display: flex;
         padding-left: 40px;
         padding-right: 40px;
+        //background-color:var(--ion-item-background);
+        border: 10px solid;
+        border-width: 0 0 2px 0;
+        border-image: linear-gradient(to right,#6a11cf,#428cff) 1;
     }
 }
 
@@ -32,3 +36,4 @@
 .active-item{
     border-bottom: 2px solid var(--ion-color-primary);
 }
+
