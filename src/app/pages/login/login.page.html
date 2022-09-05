@@ -1,6 +1,6 @@
 <ion-content>
   <div class="ion-padding">
-  <ion-segment [(ngModel)]="segment" scrollable>
+  <ion-segment [(ngModel)]="segment" swipe-gesture >
     <ion-segment-button value="first">
       Login
     </ion-segment-button>
@@ -23,8 +23,10 @@
             <ion-note slot="error" *ngIf="(loginPassword.dirty || loginPassword.touched) && loginPassword.errors">Password is invalid</ion-note>
           </ion-item>
           <ion-button expand= "full" type="submit" [disabled]="!loginCredentials.valid">Login</ion-button>
-          <p>Forgot your password?</p>
-          <ion-button [routerLink]="['/forgotpassword']" routerDirection="root">Reset password</ion-button>
+          <div >
+            <ion-note class="rst">Forgot your password?<ion-button class="resetBtn" fill="clear" size="small" [routerLink]="['/forgotpassword']" routerDirection="root">Reset password</ion-button></ion-note>
+          
+          </div>          
         </form>
       </ion-card-content>
     </ion-card>
@@ -32,15 +34,18 @@
     <ion-card *ngSwitchCase="'second'">
       <ion-card-content>
         <form [formGroup]="regCredentials" (ngSubmit)="submitRegister()">
-          <ion-input type="email" placeholder="Email" formControlName="regEmail"></ion-input>
-          <ion-note slot="error" *ngIf="(regEmail.dirty || regEmail.touched) && regEmail.errors">Email is invalid</ion-note>
-
-          <ion-input pattern=".{5,10}" type="password" placeholder="Password" formControlName="regPassword1"></ion-input>
-          <ion-note slot="error" *ngIf="(regPassword1.dirty || regPassword1.touched) && regPassword1.errors">Password needs to be at least 6 characters long</ion-note>
-
-          <ion-input pattern=".{5,10}" type="password" placeholder="Confirm password" formControlName="regPassword2"></ion-input>
-          <ion-note slot="error" *ngIf="(regPassword2.dirty || regPassword2.touched || (regPassword2.touched && (regPassword1.value !== regPassword2.value))) && (regPassword2.errors)">Passwords dont match</ion-note>
-
+          <ion-item>
+            <ion-input type="email" placeholder="Email" formControlName="regEmail"></ion-input>
+            <ion-note slot="error" *ngIf="(regEmail.dirty || regEmail.touched) && regEmail.errors">Email is invalid</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-input  type="password" placeholder="Password" formControlName="regPassword1"></ion-input>
+            <ion-note slot="error" *ngIf="(regPassword1.dirty || regPassword1.touched) && regPassword1.errors">Password needs to be at least 6 characters long</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-input  type="password" placeholder="Confirm password" formControlName="regPassword2"></ion-input>
+            <ion-note slot="error" *ngIf="this.regCredentials.controls['regPassword2'].getError('mismatch')!=null">Passwords dont match</ion-note>
+          </ion-item>
           <ion-button expand= "full" type="submit" [disabled]="!regCredentials.valid">Register</ion-button>
         </form>
       </ion-card-content>

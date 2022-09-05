@@ -1,3 +1,36 @@
-ion-segment-button {
+@media(max-width: 897px){   //smaller screens
     
-  }
+}
+
+@media(min-width: 897px){   //bigger screens
+    ion-card{
+        margin-left: 25%;
+        margin-right: 25%;
+        padding-top: 10px;
+        
+    }    
+}
+
+ion-card{
+    padding-top: 10px;
+    text-align: center;
+    
+}
+
+ion-input, ion-note{
+  text-align: center;
+}
+
+ion-note{
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.rst{
+  height:      40px;  
+  line-height: 40px;
+}
+
+.resetBtn{
+  vertical-align: middle;
+}

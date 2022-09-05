@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from '@angular/fire/auth'
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendSignInLinkToEmail } from '@angular/fire/auth'
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class AuthService {
   async register(email, password){
     try{
       const user = await createUserWithEmailAndPassword(this.auth, email, password);
+      this.sendEmailVerification();      
       return user;
     }catch(e){
       return null;
@@ -36,6 +37,28 @@ export class AuthService {
       const errorCode = error.code;
       const errorMessage = error.message;
     });
-
   }
+
+  sendEmailVerification(){
+    const actionCodeSettings = {  
+      url: 'http://localhost:8100/',
+      handleCodeInApp: true,
+      iOS: {
+        bundleId: ''
+      },
+      android: {
+        packageName: '',
+        installApp: true,
+        minimumVersion: '12'
+      },
+      dynamicLinkDomain: 'http://localhost:8100/'
+    };
+    console.log(this.auth.currentUser.email);
+    var user = this.auth.currentUser;
+    if(user){
+      //sendSignInLinkToEmail(this.auth,user.email,actionCodeSettings);
+    }
+  }
+
+
 }

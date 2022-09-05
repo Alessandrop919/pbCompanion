@@ -36,13 +36,24 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginCredentials=this.fb.group({loginEmail: ['', [Validators.required, Validators.email]], loginPassword: ['', [Validators.required]]});
-    this.regCredentials=this.fb.group({regEmail: ['', [Validators.required, Validators.email]], regPassword1: ['',[Validators.required,Validators.minLength(6)]], regPassword2:['',[Validators.required,Validators.minLength(6)]]},{validator:this.checkPasswords});
+    this.regCredentials=this.fb.group({regEmail: ['', [Validators.required, Validators.email]], regPassword1: ['',[Validators.required,Validators.minLength(6)]], regPassword2:['',[Validators.required,Validators.minLength(6)]]},{validator:this.validatePasswords('regPassword1','regPassword2')});
   }
 
-  checkPasswords(group:FormGroup){
-    let password1 = group.controls.regPassword1.value;
-    let password2 = group.controls.regPassword2.value;
-    return password1 === password2 ? null : { notSame:true }
+  validatePasswords(regPassword1:any,regPassword2:any){
+    return (formGroup : FormGroup) => {
+      const password1 = formGroup.controls[regPassword1];
+      const password2 = formGroup.controls[regPassword2];
+      if (password2.errors && !password2.errors['mismatch']){
+        return;
+      }
+
+      if ( password1.value !== password2.value){
+        password2.setErrors({mismatch:true});
+      }else{
+        password2.setErrors(null);
+      }
+
+    }
   }
 
   async submitLogin(){
@@ -50,7 +61,12 @@ export class LoginPage implements OnInit {
     const user = await this.authService.login(this.loginEmail.value,this.loginPassword.value);
     await this.loadingService.dismiss();
     if(user){
-      this.router.navigateByUrl('', {replaceUrl:true});
+      if(user.user.emailVerified){
+        this.router.navigateByUrl('', {replaceUrl:true});
+      }else{
+        this.showAlert('Account not verified', 'Redirecting to account verification.');
+        this.router.navigateByUrl('verifyemail', {replaceUrl:true});
+      }
     }else{
       this.showAlert('Login failed', 'Your credentials are invalid, try again.');
     }
@@ -61,9 +77,9 @@ export class LoginPage implements OnInit {
     const user = await this.authService.register(this.regEmail.value,this.regPassword1.value);
     await this.loadingService.dismiss();
     if(user){
-      this.router.navigateByUrl('', {replaceUrl:true});
+      this.router.navigateByUrl('verifyemail', {replaceUrl:true});
     }else{
-      this.showAlert('Registration failed', 'Please try again');
+      this.showAlert('Registration failed', 'Your email is invalid or might be already associated to an account, please try again');
     }
   }
 
