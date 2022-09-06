@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendSignInLinkToEmail } from '@angular/fire/auth'
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification } from '@angular/fire/auth'
+import { loggedIn } from '@angular/fire/auth-guard';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: Auth) { }
+  constructor(private auth: Auth) {
+    this.authStatusListener();
+   }
   
   async register(email, password){
     try{
-      const user = await createUserWithEmailAndPassword(this.auth, email, password);
-      this.sendEmailVerification();      
+      const user = await createUserWithEmailAndPassword(this.auth, email, password) ;
+      if(user!==null){
+        await sendEmailVerification(user.user);
+      }
       return user;
     }catch(e){
       return null;
@@ -39,26 +44,36 @@ export class AuthService {
     });
   }
 
-  sendEmailVerification(){
-    const actionCodeSettings = {  
-      url: 'http://localhost:8100/',
-      handleCodeInApp: true,
-      iOS: {
-        bundleId: ''
-      },
-      android: {
-        packageName: '',
-        installApp: true,
-        minimumVersion: '12'
-      },
-      dynamicLinkDomain: 'http://localhost:8100/'
-    };
-    console.log(this.auth.currentUser.email);
-    var user = this.auth.currentUser;
-    if(user){
-      //sendSignInLinkToEmail(this.auth,user.email,actionCodeSettings);
-    }
+  async emailVerification(){    
+    await this.auth.currentUser?.reload();
+    if(this.auth.currentUser.emailVerified){
+      return true;
+    }else{
+      sendEmailVerification(this.auth.currentUser);
+      return false;
+    }    
   }
 
+  sendVerEmail(){
+    sendEmailVerification(this.auth.currentUser);
+  }
+
+  refresh(){
+    this.auth.currentUser.reload;
+  }
+
+  authStatusListener(){
+    this.auth.onAuthStateChanged((user)=>{
+      if(user){
+        console.log('User is logged in');
+        return true;
+      }
+      else{
+        console.log('User is logged out');
+        return false;
+        
+      }
+    })
+  }
 
 }

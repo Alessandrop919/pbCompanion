@@ -1,10 +1,35 @@
 import { NgModule } from '@angular/core';
-import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo, emailVerified } from '@angular/fire/auth-guard';
 import { Routes, RouterModule } from '@angular/router';
+import { pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { MenuPage } from './menu.page';
+
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
+const redirectUnverifiedUser = () =>
+  pipe(
+    emailVerified,
+    map(emailVerified => {
+      if (emailVerified) {
+        return true;
+      } else {
+        return ['verifyemail']
+      }
+    })
+  );
+  const redirectVerifiedUser = () =>
+  pipe(
+    emailVerified,
+    map(emailVerified => {
+      if (!emailVerified) {
+        return true;
+      } else {
+        return ['']
+      }
+    })
+  );
 
 const routes: Routes = [
   {
@@ -24,11 +49,13 @@ const routes: Routes = [
         path: 'account',
         loadChildren: () => import('../account/account.module').then( m => m.AccountPageModule),
         ...canActivate(redirectUnauthorizedToLogin),
+        data: { authGuardPipe: redirectUnverifiedUser },
       },
       {
         path: 'community',
         loadChildren: () => import('../community/community.module').then( m => m.CommunityPageModule),
         ...canActivate(redirectUnauthorizedToLogin),
+        data: { authGuardPipe: redirectUnverifiedUser },
       },
       {
         path: 'leaderboards',
@@ -53,7 +80,9 @@ const routes: Routes = [
       },
       {
         path: 'verifyemail',
-        loadChildren: () => import('../verifyemail/verifyemail.module').then( m => m.VerifyemailPageModule)
+        loadChildren: () => import('../verifyemail/verifyemail.module').then( m => m.VerifyemailPageModule),
+        ...canActivate(redirectUnauthorizedToLogin),
+        data: { authGuardPipe: redirectVerifiedUser },
       }      
     ]
   },

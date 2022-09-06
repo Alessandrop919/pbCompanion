@@ -46,7 +46,6 @@ export class LoginPage implements OnInit {
       if (password2.errors && !password2.errors['mismatch']){
         return;
       }
-
       if ( password1.value !== password2.value){
         password2.setErrors({mismatch:true});
       }else{
