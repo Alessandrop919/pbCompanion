@@ -21,20 +21,37 @@
         border-width: 0 0 2px 0;
         border-image: linear-gradient(to left,#6a11cf,#428cff) 1;         
     }
-
-    ion-row{
-        //opacity: 0.5;
-    }
 }
 
 .gradient{
-    --background: linear-gradient(to left,#ac64ff,#428cff);
-    transition: 0.5s;    
+  padding: 10px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 1s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-size: large;
+  font-weight: bold;
+  background-image: linear-gradient(45deg,#9a42ff,#3179ff,#7442ff,);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;   
 }
 
-.gradient:hover{
+.gradient:hover {
+    background-position: right center;
     box-shadow: 0px 0px 20px #676770;
-}         
+    color: #fff;
+    text-decoration: none;
+}  
+
+.gradient:active {
+    transform: scale(0.95);
+}
 
 .active-item{
     border-bottom: 2px solid var(--ion-color-primary);
