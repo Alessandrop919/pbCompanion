@@ -1,6 +1,6 @@
-<ion-content>
+<ion-content class="content">
   <div class="ion-padding">
-  <ion-segment [(ngModel)]="segment" swipe-gesture >
+  <ion-segment [(ngModel)]="segment" swipe-gesture>
     <ion-segment-button value="first">
       Login
     </ion-segment-button>
@@ -8,10 +8,8 @@
       Register
     </ion-segment-button>
   </ion-segment>
-
   <div [ngSwitch]="segment">
-    <ion-card *ngSwitchCase="'first'">
-      
+    <ion-card *ngSwitchCase="'first'" class="smallCard">      
       <ion-card-content> 
         <form [formGroup]="loginCredentials" (ngSubmit)="submitLogin()">
           <ion-item>
@@ -24,14 +22,12 @@
           </ion-item>
           <ion-button expand= "full" type="submit" [disabled]="!loginCredentials.valid">Login</ion-button>
           <div >
-            <ion-note class="rst">Forgot your password?<ion-button class="resetBtn" fill="clear" size="small" [routerLink]="['/forgotpassword']" routerDirection="root">Reset password</ion-button></ion-note>
-          
+            <ion-note class="rst">Forgot your password?<ion-button class="resetBtn" fill="clear" size="small" [routerLink]="['/forgotpassword']" routerDirection="root">Reset password</ion-button></ion-note>       
           </div>          
         </form>
       </ion-card-content>
     </ion-card>
-
-    <ion-card *ngSwitchCase="'second'">
+    <ion-card *ngSwitchCase="'second'" class="smallCard">
       <ion-card-content>
         <form [formGroup]="regCredentials" (ngSubmit)="submitRegister()">
           <ion-item>

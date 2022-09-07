@@ -44,16 +44,6 @@ export class AuthService {
     });
   }
 
-  async emailVerification(){    
-    await this.auth.currentUser?.reload();
-    if(this.auth.currentUser.emailVerified){
-      return true;
-    }else{
-      sendEmailVerification(this.auth.currentUser);
-      return false;
-    }    
-  }
-
   sendVerEmail(){
     sendEmailVerification(this.auth.currentUser);
   }
@@ -65,13 +55,9 @@ export class AuthService {
   authStatusListener(){
     this.auth.onAuthStateChanged((user)=>{
       if(user){
-        console.log('User is logged in');
         return true;
-      }
-      else{
-        console.log('User is logged out');
-        return false;
-        
+      }else{
+        return false;        
       }
     })
   }

@@ -1,23 +1,9 @@
-@media(max-width: 897px){   //smaller screens
-    
-}
-
-@media(min-width: 897px){   //bigger screens
-    ion-card{
-        margin-left: 25%;
-        margin-right: 25%;
-        padding-top: 10px;
-        
-    }    
-}
-
 ion-card{
     padding-top: 10px;
-    text-align: center;
-    
+    text-align: center;    
 }
 
-ion-input, ion-note{
+ion-input{
   text-align: center;
 }
 
@@ -33,4 +19,13 @@ ion-note{
 
 .resetBtn{
   vertical-align: middle;
+}
+
+ion-segment-button{ 
+  margin: 0;
+  --background:#1E1E1E;
+  --color:white;
+  --background-checked: linear-gradient(to left,#ac64ff,#428cff);
+  --color-checked: white;
+  font-size: 20px;
 }

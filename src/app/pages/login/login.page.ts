@@ -64,6 +64,7 @@ export class LoginPage implements OnInit {
         this.router.navigateByUrl('', {replaceUrl:true});
       }else{
         this.showAlert('Account not verified', 'Redirecting to account verification.');
+        this.authService.logout();
         this.router.navigateByUrl('verifyemail', {replaceUrl:true});
       }
     }else{

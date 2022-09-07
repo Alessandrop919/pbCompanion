@@ -1,9 +1,9 @@
 <ion-app>  
-  <ion-content [fullscreen]="true">
+  <ion-content [fullscreen]="true" class="content">
     <ion-text>
-      <ion-title>NEWS AND PATCH NOTES</ion-title>
+      <ion-title class="title">NEWS</ion-title>
     </ion-text>   
-    <ion-card *ngFor="let content of contents">
+    <ion-card *ngFor="let content of contents" class="card">
       <ion-card-header>
         <ion-img style="width: 240px; height: 200px;" src="{{ content.Image }}" height="100" width="100"></ion-img>
         <ion-card-subtitle>{{ content.Date }}</ion-card-subtitle>

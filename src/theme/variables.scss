@@ -3,6 +3,9 @@
 
 /** Ionic CSS Variables **/
 :root {
+
+  --ion-font-family: 'Cerco';
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -234,7 +237,37 @@
     --ion-card-background: #1e1e1e;
   }
 
-  ion-toolbar{
-    --background:--ion-background-color;
-}  
+    
+}
+
+ion-toolbar{
+  --background:--ion-background-color;
+}
+
+@font-face {
+  font-family: 'Cerco';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/cerco/CercoDEMO-Light.otf');
+}
+
+@font-face {
+  font-family: 'Cerco';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/cerco/CercoDEMO-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Cerco';
+  font-style: italic;
+  font-weight: normal;
+  src: url('../assets/fonts/cerco/CercoDEMO-Italic.otf');
+}
+
+@font-face {
+  font-family: 'Cerco';
+  font-style: italic;
+  font-weight: bold;
+  src: url('../assets/fonts/cerco/CercoDEMO-BlackItalic.otf');
 }

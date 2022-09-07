@@ -19,12 +19,16 @@
         padding-right: 40px;
         border: 10px solid;
         border-width: 0 0 2px 0;
-        border-image: linear-gradient(to right,#6a11cf,#428cff) 1;
+        border-image: linear-gradient(to left,#6a11cf,#428cff) 1;         
+    }
+
+    ion-row{
+        //opacity: 0.5;
     }
 }
 
 .gradient{
-    --background: linear-gradient(to right,#ac64ff,#428cff);
+    --background: linear-gradient(to left,#ac64ff,#428cff);
     transition: 0.5s;    
 }
 
@@ -35,4 +39,3 @@
 .active-item{
     border-bottom: 2px solid var(--ion-color-primary);
 }
-

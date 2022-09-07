@@ -49,13 +49,11 @@ const routes: Routes = [
         path: 'account',
         loadChildren: () => import('../account/account.module').then( m => m.AccountPageModule),
         ...canActivate(redirectUnauthorizedToLogin),
-        data: { authGuardPipe: redirectUnverifiedUser },
       },
       {
         path: 'community',
         loadChildren: () => import('../community/community.module').then( m => m.CommunityPageModule),
         ...canActivate(redirectUnauthorizedToLogin),
-        data: { authGuardPipe: redirectUnverifiedUser },
       },
       {
         path: 'leaderboards',
@@ -82,7 +80,6 @@ const routes: Routes = [
         path: 'verifyemail',
         loadChildren: () => import('../verifyemail/verifyemail.module').then( m => m.VerifyemailPageModule),
         ...canActivate(redirectUnauthorizedToLogin),
-        data: { authGuardPipe: redirectVerifiedUser },
       }      
     ]
   },
