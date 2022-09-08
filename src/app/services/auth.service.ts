@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification } from '@angular/fire/auth'
-import { loggedIn } from '@angular/fire/auth-guard';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(private auth: Auth) {
     this.authStatusListener();
    }
@@ -60,6 +58,14 @@ export class AuthService {
         return false;        
       }
     })
+  }
+
+  getEmail():String{
+    return this.auth.currentUser.email;
+  }
+
+  getName():String{
+    return this.auth.currentUser.displayName;
   }
 
 }

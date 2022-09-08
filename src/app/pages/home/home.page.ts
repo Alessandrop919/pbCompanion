@@ -10,6 +10,10 @@ import { DataService } from '../../services/data.service';
 export class HomePage {
   contents = [];
   constructor(private dataService : DataService, private alertCtrl: AlertController, private modalCtrl: ModalController){
-    this.dataService.getContents().subscribe(res => this.contents=res); 
+     
+  }
+
+  ngOnInit() {
+    this.dataService.getContents().subscribe(res => this.contents=res);
   }
 }

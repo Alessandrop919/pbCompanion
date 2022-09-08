@@ -6,11 +6,11 @@ import { AlertController } from '@ionic/angular';
 
 
 @Component({
-  selector: 'app-forgotpassword',
-  templateUrl: './forgotpassword.page.html',
-  styleUrls: ['./forgotpassword.page.scss'],
+  selector: 'app-resetpassword',
+  templateUrl: './resetpassword.page.html',
+  styleUrls: ['./resetpassword.page.scss'],
 })
-export class ForgotpasswordPage implements OnInit {
+export class ResetpasswordPage implements OnInit {
 
   resetEmail : FormGroup;
   constructor(private authService: AuthService, private fb:FormBuilder, private loadingService: LoadingService, private alertController: AlertController) {

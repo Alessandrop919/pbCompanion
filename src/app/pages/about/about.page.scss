@@ -1,0 +1,36 @@
+.endSection{
+    margin-top: 20px;
+    //text-align: left!important;
+}
+.image{
+    width: 80%;
+    height: 80%;
+}
+.logo{
+    height: 30px;
+    width: 30px;
+}
+.logos{
+   font-size: 30px; 
+}
+@media(min-width: 897px){   //bigger screens
+    ion-icon{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .logo{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media(max-width: 897px){   //smaller screens
+    ion-icon{
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    .logo{
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}

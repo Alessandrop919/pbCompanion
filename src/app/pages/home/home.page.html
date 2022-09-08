@@ -5,7 +5,7 @@
     </ion-text>   
     <ion-card *ngFor="let content of contents" class="card">
       <ion-card-header>
-        <ion-img style="width: 240px; height: 200px;" src="{{ content.Image }}" height="100" width="100"></ion-img>
+        <ion-img  [src]=" content.Image " height="100" width="100"></ion-img>
         <ion-card-subtitle>{{ content.Date }}</ion-card-subtitle>
         <ion-card-title>{{ content.Title }}</ion-card-title>
         <ion-card-content>{{ content.Description }}</ion-card-content>

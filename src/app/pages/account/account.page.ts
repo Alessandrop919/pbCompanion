@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
-import { AvatarService } from '../../services/avatar.service';
+import { AvatarService } from '../../services/user.service';
 import { LoadingService } from '../../services/loading.service';
 
 
@@ -22,9 +22,10 @@ import { LoadingService } from '../../services/loading.service';
 
   async logOut(){
     await this.loadingService.present({ message: 'Logging out',duration: 5000 }); 
+    this.router.navigateByUrl('/',{ replaceUrl:true});
     await this.authService.logout();  
     await this.loadingService.dismiss();
-    this.router.navigateByUrl('/',{ replaceUrl:true});
+    
   }
 
   async changeImage(){
@@ -51,5 +52,19 @@ import { LoadingService } from '../../services/loading.service';
 
   ngOnInit() {
   }
+
+  getEmail(){
+    return this.authService.getEmail();
+  }
+
+  getName(){
+    var name = this.authService.getName();
+    if(name === null){
+      return "Not set";      
+    }else{      
+      return name;
+    }
+  }
+    
 
 }

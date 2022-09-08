@@ -19,6 +19,8 @@ ion-note{
 
 .resetBtn{
   vertical-align: middle;
+  --background: transparentize(100);
+  --background-hover: #FFFFFF;
 }
 
 ion-segment-button{ 

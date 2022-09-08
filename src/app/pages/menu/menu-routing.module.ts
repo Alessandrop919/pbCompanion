@@ -1,35 +1,12 @@
 import { NgModule } from '@angular/core';
-import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo, emailVerified } from '@angular/fire/auth-guard';
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { Routes, RouterModule } from '@angular/router';
-import { pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { MenuPage } from './menu.page';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
-const redirectUnverifiedUser = () =>
-  pipe(
-    emailVerified,
-    map(emailVerified => {
-      if (emailVerified) {
-        return true;
-      } else {
-        return ['verifyemail']
-      }
-    })
-  );
-  const redirectVerifiedUser = () =>
-  pipe(
-    emailVerified,
-    map(emailVerified => {
-      if (!emailVerified) {
-        return true;
-      } else {
-        return ['']
-      }
-    })
-  );
+
 
 const routes: Routes = [
   {
@@ -72,9 +49,8 @@ const routes: Routes = [
         loadChildren: () => import('../about/about.module').then( m => m.AboutPageModule),
       },
       {
-        path: 'forgotpassword',
-        loadChildren: () => import('../forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule),
-        ...canActivate(redirectLoggedInToHome),
+        path: 'resetpassword',
+        loadChildren: () => import('../resetpassword/resetpassword.module').then( m => m.ResetpasswordPageModule),
       },
       {
         path: 'verifyemail',

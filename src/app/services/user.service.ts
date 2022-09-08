@@ -9,7 +9,7 @@ import { getDownloadURL, uploadString } from 'firebase/storage';
   providedIn: 'root'
 })
 export class AvatarService {
-  constructor(private auth: Auth,private firestore: Firestore, private storage: Storage) { }
+  constructor(private auth: Auth, private firestore: Firestore, private storage: Storage) { }
   
 
   getUserProfile(){
@@ -32,6 +32,8 @@ export class AvatarService {
         return null;
     }
   }
+
+  
 }
 
 
