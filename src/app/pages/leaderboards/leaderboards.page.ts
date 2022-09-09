@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-leaderboards',
@@ -10,14 +10,14 @@ import { DataService } from 'src/app/services/data.service';
 export class LeaderboardsPage implements OnInit {
   users = [];  
   orderType = 4;
-  constructor(private dataService: DataService, private router:Router) { }
+  constructor(private userService: UserService, private router:Router) { }
 
   ngOnInit() {
     this.loadData();    
   }
 
   loadData(){
-    this.dataService.getLeaderboardsUsers().subscribe(res => {
+    this.userService.getAllUsers().subscribe(res => {
       switch(this.orderType) { 
         case 1: { 
           res.sort((user1,user2)=>{

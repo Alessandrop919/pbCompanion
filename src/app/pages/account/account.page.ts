@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
-import { AvatarService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { LoadingService } from '../../services/loading.service';
 
 
@@ -15,9 +15,9 @@ import { LoadingService } from '../../services/loading.service';
   export class AccountPage implements OnInit {
 
     profile=null;
-    constructor( private avatarService: AvatarService, private authService: AuthService, private router: Router, private alertController: AlertController, private loadingService:LoadingService) {
+    constructor( private userService: UserService, private authService: AuthService, private router: Router, private alertController: AlertController, private loadingService:LoadingService) {
 
-    this.avatarService.getUserProfile().subscribe((data)=>{this.profile=data;});
+    this.userService.getUserProfile().subscribe((data)=>{this.profile=data;});
   }
 
   async logOut(){
@@ -36,7 +36,7 @@ import { LoadingService } from '../../services/loading.service';
     });
     if(image){
       await this.loadingService.present({ message: 'Loading image',duration: 5000 });      
-      const result = await this.avatarService.uploadImage(image);
+      const result = await this.userService.uploadImage(image);
       await this.loadingService.dismiss();
       if(!result){
         const alert = await this.alertController.create({

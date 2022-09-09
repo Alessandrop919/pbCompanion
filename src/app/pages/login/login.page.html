@@ -42,6 +42,10 @@
             <ion-input  type="password" placeholder="Confirm password" formControlName="regPassword2"></ion-input>
             <ion-note slot="error" *ngIf="this.regCredentials.controls['regPassword2'].getError('mismatch')!=null">Passwords dont match</ion-note>
           </ion-item>
+          <ion-item>
+            <ion-input placeholder="Username" formControlName="username"></ion-input>
+            <ion-note slot="error" *ngIf="(username.dirty || username.touched) && username.errors">Username is invalid</ion-note>
+          </ion-item>
           <ion-button expand= "full" type="submit" [disabled]="!regCredentials.valid">Register</ion-button>
         </form>
       </ion-card-content>

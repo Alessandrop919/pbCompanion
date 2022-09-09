@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { LoadingService } from '../../services/loading.service';
 import { AuthService } from '../../services/auth.service'
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginPage implements OnInit {
 
   segment = 'first';
 
-  constructor(private router: Router, private fb: FormBuilder, private loadingService: LoadingService, private alertController: AlertController, private authService: AuthService) { }
+  constructor(private router: Router, private fb: FormBuilder, private loadingService: LoadingService, private alertController: AlertController, private authService: AuthService, private userService: UserService) { }
 
   get loginEmail(){
     return this.loginCredentials.get('loginEmail');
@@ -31,12 +32,15 @@ export class LoginPage implements OnInit {
     return this.regCredentials.get('regPassword1');
   }
   get regPassword2(){
-    return this.regCredentials.get('regPassword1');
+    return this.regCredentials.get('regPassword2');
+  }
+  get username(){
+    return this.regCredentials.get('username');
   }
 
   ngOnInit() {
     this.loginCredentials=this.fb.group({loginEmail: ['', [Validators.required, Validators.email]], loginPassword: ['', [Validators.required]]});
-    this.regCredentials=this.fb.group({regEmail: ['', [Validators.required, Validators.email]], regPassword1: ['',[Validators.required,Validators.minLength(6)]], regPassword2:['',[Validators.required,Validators.minLength(6)]]},{validator:this.validatePasswords('regPassword1','regPassword2')});
+    this.regCredentials=this.fb.group({regEmail: ['', [Validators.required, Validators.email]], regPassword1: ['',[Validators.required,Validators.minLength(6)]], regPassword2:['',[Validators.required,Validators.minLength(6)]], username:['',[Validators.required,Validators.minLength(3)]]},{validator:this.validatePasswords('regPassword1','regPassword2')});
   }
 
   validatePasswords(regPassword1:any,regPassword2:any){
@@ -51,8 +55,19 @@ export class LoginPage implements OnInit {
       }else{
         password2.setErrors(null);
       }
-
     }
+  }
+
+  validateUsername(username:any){
+    this.userService.getAllUsers().subscribe(res => {
+      for(let i=0;i<res.length;i++){
+        var user=res[i];
+        if(user.Nickname===username){
+          return false;
+        }
+        return true;
+      }
+    })
   }
 
   async submitLogin(){
@@ -74,10 +89,11 @@ export class LoginPage implements OnInit {
 
   async submitRegister(){
     await this.loadingService.present({ message: 'Creating account',duration: 5000 }); 
-    const user = await this.authService.register(this.regEmail.value,this.regPassword1.value);
+    const user = await this.authService.register(this.regEmail.value,this.regPassword1.value);    
     await this.loadingService.dismiss();
     if(user){
-      this.router.navigateByUrl('verifyemail', {replaceUrl:true});
+      await this.userService.initProfile(this.username.value);
+      this.router.navigateByUrl('verifyemail', {replaceUrl:true});      
     }else{
       this.showAlert('Registration failed', 'Your email is invalid or might be already associated to an account, please try again');
     }

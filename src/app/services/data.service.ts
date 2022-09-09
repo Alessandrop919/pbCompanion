@@ -13,16 +13,6 @@ export interface Content{
   Title: string;
 }
 
-export interface User{
-  id: string;
-  Kills: number;
-  Death: number;
-  TravelDist: number;
-  Xp: number;
-  imageUrl: string;
-  Nickname: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -51,11 +41,7 @@ export class DataService {
     return newColl ;
   }
 
-  getLeaderboardsUsers(){
-    const ContentsReference = collection(this.firestore,'users');
-    let coll= collectionData(ContentsReference, { }) as Observable<User[]>;    
-    return coll;
-  }
+  
 
   getContentById(id): Observable<Content>{ 
     const ContentDocReference = doc(this.firestore,'HomeContents/${id}');
