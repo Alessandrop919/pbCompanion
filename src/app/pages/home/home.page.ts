@@ -14,6 +14,6 @@ export class HomePage {
   }
 
   ngOnInit() {
-    this.dataService.getContents().subscribe(res => this.contents=res);
+    this.dataService.getHomeContents().subscribe(res => this.contents=res);
   }
 }

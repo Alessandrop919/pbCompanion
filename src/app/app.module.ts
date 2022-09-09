@@ -12,6 +12,10 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { initializeApp } from 'firebase/app';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table'  
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +25,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTableModule,
+    BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(()=> getAuth()),
     provideFirestore(() => getFirestore()),

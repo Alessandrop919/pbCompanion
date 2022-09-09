@@ -24,8 +24,7 @@ import { LoadingService } from '../../services/loading.service';
     await this.loadingService.present({ message: 'Logging out',duration: 5000 }); 
     this.router.navigateByUrl('/',{ replaceUrl:true});
     await this.authService.logout();  
-    await this.loadingService.dismiss();
-    
+    await this.loadingService.dismiss();    
   }
 
   async changeImage(){

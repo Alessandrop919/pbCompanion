@@ -25,6 +25,8 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 @media(min-width: 897px){   //bigger screens
 
     .content{
@@ -46,6 +48,10 @@
         margin-right: 10%;
         padding-top: 10px;  
     }
+
+    ion-button{
+        font-size: 14px;
+    }
 }
 
 @media(max-width: 897px){   //smaller screens
@@ -60,6 +66,10 @@
 
     .card{
         
+    }
+
+    ion-button{
+        font-size: 10px;
     }
 }
 

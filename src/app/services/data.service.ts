@@ -13,6 +13,16 @@ export interface Content{
   Title: string;
 }
 
+export interface User{
+  id: string;
+  Kills: number;
+  Death: number;
+  TravelDist: number;
+  Xp: number;
+  imageUrl: string;
+  Nickname: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +30,7 @@ export class DataService {
 
   constructor(private firestore : Firestore, private storage:Storage) { }
 
-  getContents(): Observable<Content[]>{ 
+  getHomeContents(): Observable<Content[]>{ 
     const ContentsReference = collection(this.firestore,'HomeContents');
     let coll= collectionData(ContentsReference, { idField :'id'}) as Observable<Content[]>;    
     const newColl= coll.pipe(
@@ -39,6 +49,12 @@ export class DataService {
       })
     );
     return newColl ;
+  }
+
+  getLeaderboardsUsers(){
+    const ContentsReference = collection(this.firestore,'users');
+    let coll= collectionData(ContentsReference, { }) as Observable<User[]>;    
+    return coll;
   }
 
   getContentById(id): Observable<Content>{ 
