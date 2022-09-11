@@ -1,0 +1,13 @@
+.clear{
+    --background: transparentize(100);
+    --background-hover: #FFFFFF;
+    float: right;
+}
+
+ion-input{
+    width: 100px;
+}
+
+.no-item:not(:first-child) {
+    display:none;
+}

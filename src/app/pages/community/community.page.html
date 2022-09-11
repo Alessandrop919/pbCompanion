@@ -4,19 +4,35 @@
     <ion-col>
       <ion-card>
         <ion-card-content class="text">
+          <ion-text class="subtitle">ADD FRIEND</ion-text><br>
+          <form [formGroup]="friendInfo" (ngSubmit)="addFriend()">
+            <ion-item>
+              <ion-input placeholder="Insert friend username" formControlName="username"></ion-input>
+              <ion-note slot="error" *ngIf="(username.dirty || username.touched) && username.errors"></ion-note>
+              <ion-button fill="clear" type="submit" [disabled]="!friendInfo.valid">ADD FRIEND</ion-button>
+            </ion-item>
+
+          </form>           
           <ion-text class="subtitle">FRIEND LIST</ion-text><br>
-          <ion-row *ngFor="let user of friends">
-            <ion-col>
-              <ion-label>{{profile?.Nickname}}</ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-label>{{user}}</ion-label>
-            </ion-col>
-            <ion-col>
-              <img src="{{profile?.imageUrl}}">
-              <ion-label></ion-label>
-            </ion-col>
-          </ion-row>
+          <div *ngIf="friends?.length">
+            <ion-row *ngFor="let friend of friends">
+              <ion-col>
+                <ion-item>
+                  <ion-avatar slot="start">
+                    <img src="{{friend.imageUrl}}" />
+                  </ion-avatar>
+                  <ion-label>{{friend.Nickname}}</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-button class="clear" fill="clear" (click)="removeFriend(friend)">delete</ion-button>
+                <ion-button class="clear" fill="clear" (click)="chat(friend)">chat</ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div *ngIf="!friends?.length">
+            <ion-text>Your friend list is empty</ion-text>
+          </div>
         </ion-card-content>
       </ion-card>
     </ion-col>
