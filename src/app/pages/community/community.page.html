@@ -1,13 +1,11 @@
 <ion-content class="content">
   <ion-title class="title">COMMUNITY</ion-title>
-  <ion-row>
-    <ion-col>
-      <ion-card>
+      <ion-card class="smallCard">
         <ion-card-content class="text">
           <ion-text class="subtitle">ADD FRIEND</ion-text><br>
           <form [formGroup]="friendInfo" (ngSubmit)="addFriend()">
             <ion-item>
-              <ion-input placeholder="Insert friend username" formControlName="username"></ion-input>
+              <ion-input placeholder="Insert username" formControlName="username"></ion-input>
               <ion-note slot="error" *ngIf="(username.dirty || username.touched) && username.errors"></ion-note>
               <ion-button fill="clear" type="submit" [disabled]="!friendInfo.valid">ADD FRIEND</ion-button>
             </ion-item>
@@ -17,7 +15,7 @@
           <div *ngIf="friends?.length">
             <ion-row *ngFor="let friend of friends">
               <ion-col>
-                <ion-item>
+                <ion-item style="--background: transparent;" lines="none">
                   <ion-avatar slot="start">
                     <img src="{{friend.imageUrl}}" />
                   </ion-avatar>
@@ -26,6 +24,8 @@
               </ion-col>
               <ion-col>
                 <ion-button class="clear" fill="clear" (click)="removeFriend(friend)">delete</ion-button>
+              </ion-col>
+              <ion-col>
                 <ion-button class="clear" fill="clear" (click)="chat(friend)">chat</ion-button>
               </ion-col>
             </ion-row>
@@ -35,16 +35,12 @@
           </div>
         </ion-card-content>
       </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-card>
+      <ion-card class="smallCard">
         <ion-card-content class="text"> 
           <ion-text class="subtitle">TEAM</ion-text><br>
           <ion-text>Team section is currently not available.</ion-text>
           <!-- create a new team / show current team-->
         </ion-card-content>
       </ion-card>
-    </ion-col>
-  </ion-row> 
   
 </ion-content>

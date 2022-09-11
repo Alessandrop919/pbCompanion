@@ -4,10 +4,7 @@
     float: right;
 }
 
-ion-input{
-    width: 100px;
-}
-
-.no-item:not(:first-child) {
-    display:none;
+ion-col{
+    display: flex;
+    justify-content: center;
 }
