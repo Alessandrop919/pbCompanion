@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { collectionData, doc, docData, Firestore, updateDoc, addDoc, collection, deleteDoc } from '@angular/fire/firestore';
+import { collectionData, doc, docData, Firestore, updateDoc, addDoc, collection, deleteDoc, query, where, getDocs } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Observable, from } from 'rxjs';
 import { getDownloadURL, getStorage } from 'firebase/storage';
 import { ref, Storage } from '@angular/fire/storage';
+import { User } from './user.service';
 
 export interface Content{
   id?: string; 
@@ -16,10 +17,17 @@ export interface Content{
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
 
+/**
+ * Retrieves data from firebase database.
+ */
+export class DataService {
   constructor(private firestore : Firestore, private storage:Storage) { }
 
+  /**
+   * Retrieves home page's contents.
+   * @returns observable containing array of content 
+   */
   getHomeContents(): Observable<Content[]>{ 
     const ContentsReference = collection(this.firestore,'HomeContents');
     let coll= collectionData(ContentsReference, { idField :'id'}) as Observable<Content[]>;    
@@ -41,25 +49,48 @@ export class DataService {
     return newColl ;
   }
 
-  
-
-  getContentById(id): Observable<Content>{ 
-    const ContentDocReference = doc(this.firestore,'HomeContents/${id}');
-    return docData(ContentDocReference, { idField :'id'}) as Observable<Content>;
+  /**
+   * Retrieves a user's profile from given nickname.
+   * @param nickname name of the user as string
+   * @returns user's profile as User, or null if the user couldnt be found
+   */
+  async getUser(nickname){
+    const UsersReference = collection(this.firestore,'users');    
+    const q= query(UsersReference, where ("Nickname","==", nickname));
+    const querySnapshot = await getDocs(q);
+    var retUser:User;
+    if(querySnapshot.size==0){
+      return null;
+    }
+    retUser=querySnapshot.docs[0].data() as User;
+    retUser.id=querySnapshot.docs[0].id;
+    return retUser;
   }
 
-  addContent(Content:Content){
-    const ContentsReference = collection(this.firestore,'HomeContents');
-    return addDoc(ContentsReference,Content);
+  /**
+   * Retrieves all users in the platform.
+   * @returns Observable containing array of User
+   */
+  getAllUsers(){
+    const ContentsReference = collection(this.firestore,'users');
+    let coll= collectionData(ContentsReference, { }) as Observable<User[]>;    
+    return coll;
   }
-
-  deleteContent(Content:Content){
-    const ContentDocReference = doc(this.firestore,'HomeContents.id');
-    return deleteDoc(ContentDocReference);
-  }
-
-  updateContent(Content:Content){
-    const ContentDocReference = doc(this.firestore,'HomeContents.id');
-    return updateDoc(ContentDocReference,{Description: Content.Description, Date:Content.Date});
+  /**
+   * Retrieves all e-mail-verified users in the platform.
+   * @returns Promise containing array of User
+   */
+  async getAllVerifiedUsers(){
+    const UsersReference = collection(this.firestore,'users');
+    const q= query(UsersReference, where ("Verified","==", true));
+    const querySnapshot = await getDocs(q);
+    var users = new Array<User>();
+    var user:User;
+    querySnapshot.forEach((doc) => { 
+      user= doc.data() as User;
+      user.id= doc.id;
+      users.push(user);        
+    });
+    return users;
   }
 }

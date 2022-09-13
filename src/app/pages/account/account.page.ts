@@ -12,14 +12,19 @@ import { LoadingService } from '../../services/loading.service';
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
-  export class AccountPage implements OnInit {
 
+  export class AccountPage implements OnInit {
     profile=null;
     constructor( private userService: UserService, private authService: AuthService, private router: Router, private alertController: AlertController, private loadingService:LoadingService) {
-
     this.userService.getUserProfile().subscribe((data)=>{this.profile=data;});
   }
 
+  ngOnInit() {
+  }
+
+  /**
+   * Forwards log out request to authentication service.
+   */
   async logOut(){
     await this.loadingService.present({ message: 'Logging out',duration: 5000 }); 
     this.router.navigateByUrl('/',{ replaceUrl:true});
@@ -27,6 +32,9 @@ import { LoadingService } from '../../services/loading.service';
     await this.loadingService.dismiss();    
   }
 
+  /**
+   * Allows user to select new image to set as profile picture and forwards request to user service.
+   */
   async changeImage(){
     const image = await Camera.getPhoto({
       quality: 90,
@@ -47,15 +55,20 @@ import { LoadingService } from '../../services/loading.service';
         await alert.present();
       }
     }
-  }
+  }  
 
-  ngOnInit() {
-  }
-
+  /**
+   * Retrieves current authenticated user's profile email.
+   * @returns email as string
+   */
   getEmail(){
     return this.authService.getEmail();
   }
 
+  /**
+   * Retrieves current authenticated user's profile name.
+   * @returns user's name as string
+   */
   getName(){
     var name = this.authService.getName();
     if(name === null){

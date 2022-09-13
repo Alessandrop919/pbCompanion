@@ -11,7 +11,6 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./resetpassword.page.scss'],
 })
 export class ResetpasswordPage implements OnInit {
-
   resetEmail : FormGroup;
   constructor(private authService: AuthService, private fb:FormBuilder, private loadingService: LoadingService, private alertController: AlertController) {
     this.resetEmail = this.fb.group({email:['',[Validators.required, Validators.email]]});
@@ -20,6 +19,9 @@ export class ResetpasswordPage implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Forwards reset request to the authentication service.
+   */
   async submit(){
     await this.loadingService.present({ message: 'Checking email',duration: 5000 }); 
     this.authService.forgotPassword(this.resetEmail.get('email').value);

@@ -12,6 +12,9 @@ export class VerifyemailPage implements OnInit {
   ngOnInit() {    
   }
 
+  /**
+   * Travels the user to the home page.
+   */
   back(){
     this.router.navigateByUrl('', {replaceUrl:true});
   }
