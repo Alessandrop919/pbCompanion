@@ -56,7 +56,7 @@ export class FriendService {
   async addFriend(friendName){
     let friendUser:User;
     friendUser=await this.dataService.getUser(friendName);
-    if(friendUser!==null){
+    if(friendUser!==null && friendUser.Verified){
       this.userService.getUserProfile().subscribe((res)=>{ 
       if(res.FriendList!==null){
         for (let index = 0; index < res.FriendList.length; index++) {
